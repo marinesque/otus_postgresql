@@ -57,4 +57,45 @@ ox c Ubuntu и Postgresql 14:
 Думала, что проблема в пароле, поэтому попробовала овнером поставить себя, но все равно получила ошибку:
 ![Screenshot from 2024-02-22 22-00-56](https://github.com/marinesque/otus_postgresql/assets/97790878/f09b7825-935b-4946-ad39-916373afb2fe)
 
+Поняла, что надо выйти из-под пользователя. И всё получилось:
+
+![Screenshot from 2024-02-22 22-31-32](https://github.com/marinesque/otus_postgresql/assets/97790878/aa908dc0-b798-4fd5-be04-3a95f3f83c9a)
+
+Забыла стопнуть кластер перед перемещением папки, поэтому сначала остановила, потом удалила косячно созданные папки и переместила снова:
+
+![Screenshot from 2024-02-22 22-38-10](https://github.com/marinesque/otus_postgresql/assets/97790878/324825c4-5773-40b8-865e-eed40474b370)
+
+При попытке поднять кластер снова получаю ошибку. Естественно, ведь ему не сказали, где файлы лежат:
+
+![Screenshot from 2024-02-22 22-39-16](https://github.com/marinesque/otus_postgresql/assets/97790878/ae9f64ef-e403-43b5-a641-aa64fe38ca73)
+
+Пошла показать новое место расположения файлов:
+
+![Screenshot from 2024-02-22 22-56-34](https://github.com/marinesque/otus_postgresql/assets/97790878/6f28ea99-afec-43ff-9fcd-80f9ae82ad1d)
+
+Попробовала запустить кластер снова, получила ошибку:
+
+![Screenshot from 2024-02-22 23-00-07](https://github.com/marinesque/otus_postgresql/assets/97790878/1f49851d-38ec-47b8-9620-4cbce934663a)
+
+В итоге кластер не поднялся:
+
+![Screenshot from 2024-02-22 23-00-22](https://github.com/marinesque/otus_postgresql/assets/97790878/3897c7b7-9b6a-4637-9504-bceecf97f91b)
+
+Я рестартанула вм, а после рестарта увидела,, что у меня торчит приаттаченная партиция нового диска, файлы Postgresql лежат в ней, но это далеко не /mnt/sda1
+
+![Screenshot from 2024-02-22 23-05-09](https://github.com/marinesque/otus_postgresql/assets/97790878/78fe80c5-6ca1-48c7-968d-65deffda89b7)
+
+Окей, думаю я, попробую показать джобе, где новое место для файлов, но встретила ошибку:
+
+![Screenshot from 2024-02-22 23-11-16](https://github.com/marinesque/otus_postgresql/assets/97790878/d581af5b-affa-4dc0-b837-c16d41936ef4)
+
 Что делаю не так?
+
+
+
+
+
+
+
+
+

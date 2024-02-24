@@ -56,7 +56,7 @@
 
 ![Screenshot from 2024-02-24 12-02-04](https://github.com/marinesque/otus_postgresql/assets/97790878/65a10cd1-d388-4fd9-bfb0-6332d8bd0637)
 
-Неуспешно. Но мы в public никакие права пользователю testdb и роли readonly не давали.
+Неуспешно. Но мы в public никакие права пользователю testread и роли readonly не давали.
 Попробуем создать таблицу без указания схемы под пользователем testread:
 
 ![Screenshot from 2024-02-24 12-03-08](https://github.com/marinesque/otus_postgresql/assets/97790878/0bd4811f-9a9e-49e1-8154-7da44f09b011)

@@ -67,8 +67,20 @@ Postgresql 15:
 
 ![Screenshot from 2024-03-05 21-36-01](https://github.com/marinesque/otus_postgresql/assets/97790878/14ed1e0c-81f3-4571-855c-cf86a3216503)
 
+![Screenshot from 2024-03-05 21-42-28](https://github.com/marinesque/otus_postgresql/assets/97790878/dfcea6d2-ebd7-46d1-a409-1a708b3a5f05)
+
 ![Screenshot from 2024-03-05 21-35-19](https://github.com/marinesque/otus_postgresql/assets/97790878/759a8c1c-50e4-4623-9050-4799372bc382)
 
 ![Screenshot from 2024-03-05 21-28-16](https://github.com/marinesque/otus_postgresql/assets/97790878/f29b5ad3-c68c-45bb-bb4d-b131e43a4ac5)
+
+Попробовала vacuum full на таблице:
+
+![Screenshot from 2024-03-05 21-59-05](https://github.com/marinesque/otus_postgresql/assets/97790878/9f52c6cd-4c96-4238-b4b4-f568657daf9c)
+
+![Screenshot from 2024-03-05 21-59-19](https://github.com/marinesque/otus_postgresql/assets/97790878/98be4957-2676-47e9-b3f8-7b5a8ba65949)
+
+![Screenshot from 2024-03-05 22-00-39](https://github.com/marinesque/otus_postgresql/assets/97790878/f037515d-0f36-46a1-8ec3-3ef4d893ac34)
+
+Файл пересоздался и стал более компактным после высвобождения места из-под мертвых строк.
 
 

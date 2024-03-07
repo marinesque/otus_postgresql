@@ -45,16 +45,13 @@
 
 ![Screenshot from 2024-03-07 11-18-31](https://github.com/marinesque/otus_postgresql/assets/97790878/f6588bd6-01e4-46b5-8442-03f499143bbd)
 
-
 Сессия 2:
 
 ![Screenshot from 2024-03-07 11-18-35](https://github.com/marinesque/otus_postgresql/assets/97790878/d5f6783c-9683-4ffb-9791-17fa1e8db26f)
 
-
 Сессия 3:
 
 ![Screenshot from 2024-03-07 11-18-54](https://github.com/marinesque/otus_postgresql/assets/97790878/27228906-5d73-48f2-9790-96d2043ff53e)
-
 
 Результат - убило транзакцию сессии 3:
 
@@ -64,6 +61,25 @@
 В логах отражено, кто ждал, кто убит, что хотел выполнить, как5им процессом блокировался:
 
 ![Screenshot from 2024-03-07 12-14-39](https://github.com/marinesque/otus_postgresql/assets/97790878/c5da9b68-226f-4d63-877e-bf50ddfd1d5f)
+
+4. Могут ли две транзакции, выполняющие единственную команду UPDATE одной и той же таблицы (без where), заблокировать друг друга?
+
+Если команды исполняются единственными в транзакции, скорее всего не смогут, кто-то так или иначе заблокируется первым. На таком уровне обычно блокировки эскалируются до таблицы.
+
+А если в транзакциях будет заблокирована часть строк звзаимоисключающая друг друга, более мелкая грануляция блокировки, то update смогут заблокировать друг друга.
+
+Сессия 1:
+
+![Screenshot from 2024-03-07 12-33-22](https://github.com/marinesque/otus_postgresql/assets/97790878/44324608-ef7a-4393-bee9-8496f3266e27)
+
+Сессия 2:
+
+![Screenshot from 2024-03-07 12-33-32](https://github.com/marinesque/otus_postgresql/assets/97790878/419854d2-cde0-4967-ac68-5417d0deb7da)
+
+Результат:
+
+![Screenshot from 2024-03-07 12-30-09](https://github.com/marinesque/otus_postgresql/assets/97790878/6feb9b36-2c50-4fa8-8cc6-1b866f43a9db)
+
 
 
 

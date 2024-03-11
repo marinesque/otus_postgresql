@@ -58,3 +58,38 @@ Latest checkpoint's redo - lsn записи начала контрольной 
 
 В асинхронном режиме количество транзакций, которые успели обработаться, значительно увеличилось. 
 А вот время транзакций также увеличилось, потому что завершались они в асинхронном режиме, коммит мог произойти гораздо позже фактического завершения работы транзакции.
+
+  show data_checksums;
+  alter system set data_checksums = on;
+  
+  show ignore_checksum_failure;
+  alter system set ignore_checksum_failure = off;
+  
+  show wal_log_hints;
+  alter system set wal_log_hints = on;
+  
+  
+  select pg_reload_conf();
+
+Создала таблицу:
+
+  create table test11 (col text);
+  
+  insert into test11(col)
+  select md5(random()::text) from generate_series(1,1000000);
+    
+  select pg_relation_filepath('test11'); --base/5/32928
+
+Останавливаю кластер:
+
+![Screenshot from 2024-03-11 11-41-16](https://github.com/marinesque/otus_postgresql/assets/97790878/54d7db76-f0e6-4f56-88b2-d2da8a379474)
+
+Заменила 16 битов нулями в файле таблицы и поднимаю кластер:
+
+![Screenshot from 2024-03-11 11-41-34](https://github.com/marinesque/otus_postgresql/assets/97790878/d55996bb-8269-41b4-8029-96ade4e98b6d)
+
+Пробую подключиться к базе и прочитать данные из таблицы:
+
+![Screenshot from 2024-03-11 10-15-14](https://github.com/marinesque/otus_postgresql/assets/97790878/24b937f5-459f-4b76-b38c-828de2694ef1)
+
+Получаю ошибку. Теперь, я так понимаю, светит только восстановление из резервной копии.

@@ -34,6 +34,7 @@ create publication ..
 /etc/postgresql/15/main/postgresql.conf:
 
 VM1:
+
 ![Screenshot from 2024-03-20 21-33-03](https://github.com/marinesque/otus_postgresql/assets/97790878/4c6f6ab4-682d-4646-8aac-467afb885fd9)
 
 /etc/postgresql/15/main/pg_hba.conf:
@@ -46,9 +47,16 @@ systemctl restart postgresql.service
 
 
 
+![Screenshot from 2024-03-20 21-39-36](https://github.com/marinesque/otus_postgresql/assets/97790878/e9302817-ccc2-4e17-aa79-bee1ee1c972f)
+
+
+VM2:
+create subscription from1to2sub connection 'host=192.168.0.4 port=5432 user=postgres password=postgres dbname=postgres' publication from1to2pub;
+create publication from2to1pub for table public.test2;
 
 
 VM1:
+
 ![Screenshot from 2024-03-20 21-31-22](https://github.com/marinesque/otus_postgresql/assets/97790878/499c9154-e24a-4494-a6f5-2a57bd6ac7a5)
 
 

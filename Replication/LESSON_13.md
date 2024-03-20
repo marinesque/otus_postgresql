@@ -14,28 +14,40 @@
 Затем я создала на каждой из вм таблицы
 
 VM1:
+~~~
 create table public.test(col text);
 insert into public.test(col) values ('This is from machine 1');
 
 create table public.test2(col text);
+~~~
 
 VM2:
+~~~
 create table public.test2(col text);
 insert into public.test2(col) values ('This is from machine 2');
 
 create table public.test(col text);
+~~~
 
 VM1:
+~~~
 create publication from1to2pub for table public.test;
+~~~
 
 VM2:
+~~~
 create publication from2to1pub for table public.test2;
+~~~
 
 VM1:
+~~~
 create subscription from2to1sub connection 'host=192.168.0.4 port=5432 user=postgres password=postgres dbname=postgres' publication from2to1pub;
+~~~
 
 VM2:
+~~~
 create subscription from1to2sub connection 'host=192.168.0.4 port=5432 user=postgres password=postgres dbname=postgres' publication from1to2pub;
+~~~
 
 При попытке создания подписки сначала я получала ошибки подключения к Postgresql другой машины.
 Пошла копаться в конфигах. Прослушка локалхоста была заменена на '*'.
@@ -54,9 +66,13 @@ VM1:
 
 ![Screenshot from 2024-03-20 21-35-51](https://github.com/marinesque/otus_postgresql/assets/97790878/46665924-1282-44d3-9abe-cbe2163a1bcb)
 
+~~~
 alter system set wal_level = logical;
+~~~
 
+~~~
 systemctl restart postgresql.service
+~~~
 
 В результате данные пришли на дружественные машинки в целости и сохранности:
 

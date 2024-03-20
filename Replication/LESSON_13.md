@@ -53,6 +53,7 @@ create subscription from1to2sub connection 'host=192.168.0.4 port=5432 user=post
 Пошла копаться в конфигах. Прослушка локалхоста была заменена на '*'.
 Изменила wal_level на logical.
 Добавила ip в pg_hba.conf. Сначала забыла указать, как будет аутентификация происходить. Получила пару ошибок на этот счет.
+Еще установила пароль для postgres юзера, я указываю его в коннекшне.
 
 ![Screenshot from 2024-03-20 21-39-36](https://github.com/marinesque/otus_postgresql/assets/97790878/e9302817-ccc2-4e17-aa79-bee1ee1c972f)
 
@@ -68,6 +69,7 @@ VM1:
 
 ~~~
 alter system set wal_level = logical;
+alter user postgres password 'postgres';
 ~~~
 
 ~~~

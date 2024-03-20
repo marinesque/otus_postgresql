@@ -7,6 +7,11 @@
 
 Я объединила их в NAT сеть, чтобы у каждой был доступ к глобальной сети, но чтобы они пинговались по 192.168.0.ХХХ.
 
+![Screenshot from 2024-03-20 22-00-21](https://github.com/marinesque/otus_postgresql/assets/97790878/e7fe52c8-727f-4d42-8692-990e14e8d507)
+
+![Screenshot from 2024-03-20 22-00-02](https://github.com/marinesque/otus_postgresql/assets/97790878/e016035a-406e-4d54-8a25-dd1728189b21)
+
+Для второй вм аналогично.
 
 Удостоверилась, что вм друг друга видят с помощью ping.
 

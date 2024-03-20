@@ -31,3 +31,24 @@ create publication ..
 Сначала я получала ошибки подключения к Postgresql другой машины.
 Пошла копаться в конфигах.
 
+/etc/postgresql/15/main/postgresql.conf:
+
+VM1:
+![Screenshot from 2024-03-20 21-33-03](https://github.com/marinesque/otus_postgresql/assets/97790878/4c6f6ab4-682d-4646-8aac-467afb885fd9)
+
+/etc/postgresql/15/main/pg_hba.conf:
+
+![Screenshot from 2024-03-20 21-35-51](https://github.com/marinesque/otus_postgresql/assets/97790878/46665924-1282-44d3-9abe-cbe2163a1bcb)
+
+alter system set wal_level = logical;
+
+systemctl restart postgresql.service
+
+
+
+
+
+VM1:
+![Screenshot from 2024-03-20 21-31-22](https://github.com/marinesque/otus_postgresql/assets/97790878/499c9154-e24a-4494-a6f5-2a57bd6ac7a5)
+
+

@@ -1,7 +1,7 @@
 Не буду распиисывать подробности, т.к. работала над задачей в несколько заходов в разные дни и просто не успела сделать подробные скриншоты.
 
 Исходные данные:
-Две виртуальные машины с Ubuntu 22.04. На машине 1 - Postgresql 15, 2 - Postgresql 16.
+Две виртуальные машины с Ubuntu 22.04. На машине 1 (192.168.0.4) - Postgresql 15, 2 (192.168.0.5) - Postgresql 16.
 
 Первое, что я пыталась сделать - подружить эти две вм. Чтобы они могли видеть друг друга и общаться.
 
@@ -26,10 +26,23 @@ insert into public.test2(col) values ('This is from machine 2');
 create table public.test(col text);
 
 VM1:
-create publication ..
+create publication from1to2pub for table public.test;
 
-Сначала я получала ошибки подключения к Postgresql другой машины.
-Пошла копаться в конфигах.
+VM2:
+create publication from2to1pub for table public.test2;
+
+VM1:
+create subscription from2to1sub connection 'host=192.168.0.4 port=5432 user=postgres password=postgres dbname=postgres' publication from2to1pub;
+
+VM2:
+create subscription from1to2sub connection 'host=192.168.0.4 port=5432 user=postgres password=postgres dbname=postgres' publication from1to2pub;
+
+При попытке создания подписки сначала я получала ошибки подключения к Postgresql другой машины.
+Пошла копаться в конфигах. Прослушка локалхоста была заменена на '*'.
+Изменила wal_level на logical.
+Добавила ip в pg_hba.conf. Сначала забыла указать, как будет аутентификация происходить. Получила пару ошибок на этот счет.
+
+![Screenshot from 2024-03-20 21-39-36](https://github.com/marinesque/otus_postgresql/assets/97790878/e9302817-ccc2-4e17-aa79-bee1ee1c972f)
 
 /etc/postgresql/15/main/postgresql.conf:
 
@@ -45,15 +58,7 @@ alter system set wal_level = logical;
 
 systemctl restart postgresql.service
 
-
-
-![Screenshot from 2024-03-20 21-39-36](https://github.com/marinesque/otus_postgresql/assets/97790878/e9302817-ccc2-4e17-aa79-bee1ee1c972f)
-
-
-VM2:
-create subscription from1to2sub connection 'host=192.168.0.4 port=5432 user=postgres password=postgres dbname=postgres' publication from1to2pub;
-create publication from2to1pub for table public.test2;
-
+В результате данные пришли на дружественные машинки в целости и сохранности:
 
 VM1:
 

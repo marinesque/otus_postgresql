@@ -53,6 +53,12 @@ from t1
 left join t2 on t1.map = t2.map
 left join t3 on t2.col2 = t3.col3;
 
+--Запись из t1 и t2 по полному совпадению и/или запись t3 при совпадении col-колонок
+select *
+from t1
+inner join t2 on t1.map = t2.map
+full outer join t3 on t2.col2 = t3.col3;
+
 drop table if exists tab;
 create temp table tab(col text);
 drop table if exists multiplier;
